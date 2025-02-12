@@ -10,7 +10,7 @@ data = pd.read_csv(path, dtype={"ID": str}).dropna().reset_index(drop=True)
 X = data.drop(columns=["increase_stock"])  # Features
 Y = data["increase_stock"]  # Output
 
-# Make results reproducible
+# Make things not 
 np.random.seed(0)
 n_fold = 10
 cv = skl_ms.KFold(
