@@ -5,12 +5,12 @@ import sklearn.preprocessing as skl_pre
 import sklearn.model_selection as skl_ms
 
 # Import data
-path = "Project/training_data_vt2025.csv"
+path = "training_data_vt2025.csv"
 data = pd.read_csv(path, dtype={"ID": str}).dropna().reset_index(drop=True)
 X = data.drop(columns=["increase_stock"])  # Features
 Y = data["increase_stock"]  # Output
 
-# Make things not 
+# Make things not random
 np.random.seed(0)
 n_fold = 10
 cv = skl_ms.KFold(
@@ -25,6 +25,8 @@ def random_split(percent_train=0.5):
         data.index, size=int(percent_train * len(data)), replace=False
     )
     trainIndex = data.index.isin(trainI)
-    train = data.iloc[trainIndex]
-    test = data.iloc[~trainIndex]
-    return train, test
+    trainX = X.iloc[trainIndex]
+    trainY = Y.iloc[trainIndex]
+    testX = X.iloc[~trainIndex]
+    testY = Y.iloc[~trainIndex]
+    return trainX, trainY, testX, testY
