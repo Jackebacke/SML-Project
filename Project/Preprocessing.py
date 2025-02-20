@@ -18,7 +18,6 @@ cv = skl_ms.KFold(
 )  # Cross-validation with 10 folds, use by calling cv.split(X)
 
 
-####################################################################################################
 def random_split(percent_train=0.5):
     # Split data into training and test set randomly (50% each by default)
     trainI = np.random.choice(
